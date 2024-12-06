@@ -1,0 +1,17 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+  <h1>Gráfica de las Empresas que Más Donan</h1>
+  
+  <div>
+    <h3>Las 10 Empresas con más Donaciones</h3>
+    <img src="{{ graph_image.url }}" alt="Gráfico de Donaciones">
+</div>
+
+  <br>
+
+  <!-- Puedes agregar otras informaciones si es necesario -->
+  <div>
+    <a href="{% url 'admin:app_list' app_label='donaciones' %}">Volver al listado de donaciones</a>
+</div>
+{% endblock %}

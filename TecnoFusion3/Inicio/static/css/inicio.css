@@ -1,0 +1,193 @@
+/* Reseteo y fuente global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+}
+
+/* Banner */
+.banner {
+    width: 100%;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+}
+
+
+/* Estilos de tarjeta */
+.cards {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+/*Posible modo oscuro*/
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 22%;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px #1B061B;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+}
+/*Modo oscuro*/
+.card h3 {
+    font-size: 1.2em;
+    color: #1B061B;
+}
+/*Modo oscuro*/
+.card p {
+    font-size: 0.9em;
+    color: #1B061B;
+    margin: 10px 0;
+    flex-grow: 1;
+    text-align: justify;
+}
+
+/*Modo Oscuro */
+.card button {
+    padding: 10px 20px;
+    background-color: #1B061B;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+    align-self: center;
+}
+
+/* Sección "About" */
+.about {
+    width: 100%;
+    margin: 30px 0;
+    text-align: center;
+}
+
+/*Modo Oscuro */
+.about h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #1B061B;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: justify;
+}
+
+.about-content img {
+    width: 250px;
+    height: auto;
+}
+
+/*Modo Oscuro */
+.about-content p {
+    max-width: 600px;
+    font-size: 1em;
+    color: #1B061B;
+}
+
+/* Sección de productos */
+.products {
+    width: 100%;
+    margin: 30px 0;
+    text-align: center;
+}
+
+/*Modo Oscuro */
+.products h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #1B061B;
+}
+
+.products-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    text-align: justify;
+}
+
+/*Modo Oscuro */
+.products-content .text-content {
+    max-width: 600px;
+    font-size: 0.9em;
+    color: #1B061B;
+}
+
+/*Modo Oscuro */
+.products-content .text-content h3 {
+    font-size: 1.2em;
+    color: #1B061B;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/*Modo Oscuro */
+.products-content .text-content p {
+    font-size: 1em;
+    color: #1B061B;
+}
+
+
+.products-content .image-content img {
+    width: 250px;
+    height: auto;
+}
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .div1, .div2, .div3, .div4 {
+        width: 10rem;
+        height: 15rem;
+    }
+
+    .c, .c2 {
+        width: 80%;
+        height: auto;
+        padding: 2rem;
+        border-radius: 10rem;
+    }
+
+    .imgLapton, .imgAP {
+        width: 80%;
+        height: auto;
+    }
+
+    .cuadro {
+        width: 90%;
+        height: auto;
+        margin: 2rem 0;
+    }
+
+    .imgGP {
+        width: 80%;
+        height: auto;
+    }
+}

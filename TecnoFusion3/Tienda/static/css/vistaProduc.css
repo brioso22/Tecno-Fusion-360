@@ -1,0 +1,81 @@
+/* Contenedor del botón, añade margen inferior para separación */
+.back-button-container {
+    margin-bottom: 30px; /* Ajusta el valor para la separación */
+}
+
+/* Estilo general para el contenedor del producto */
+.product-container {
+    display: flex;
+    gap: 20px; /* Espacio entre la imagen y los detalles */
+    align-items: flex-start;
+    margin-top: 20px; /* Separación superior */
+}
+
+/* Contenedor de la imagen con zoom */
+.zoom-container {
+    position: relative;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo suave, ajustable */
+    border-radius: 15px; /* Borde redondeado para un estilo más suave */
+    width: 300px; /* Ancho del cuadro */
+    height: 300px; /* Alto del cuadro */
+    overflow: hidden; /* Oculta cualquier contenido fuera del cuadro */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra suave para darle profundidad */
+    display: flex; /* Flexbox para centrar el contenido */
+    justify-content: center; /* Centra la imagen dentro del contenedor */
+    align-items: center; /* Alinea la imagen verticalmente */
+    margin-left: 15px; /* Aleja el contenedor de la izquierda (ajusta el valor según lo necesites) */
+}
+
+.product-img {
+    width: 100%; /* La imagen ocupará el 100% del ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border: 2px solid #ccc; /* Agrega borde */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Lupa de zoom */
+.zoom-lens {
+    position: absolute;
+    border: 2px solid rgba(0, 0, 0, 0.2); /* Borde sutil de color gris oscuro */
+    width: 150px; /* Tamaño de la lupa */
+    height: 150px;
+    cursor: none;
+    display: none; /* Se oculta inicialmente */
+    border-radius: 50%; /* Lupa redonda */
+    background-color: rgba(231, 225, 225, 0.3); /* Fondo semitransparente */
+    z-index: 100;
+    pointer-events: none;
+}
+
+/* Detalles del producto */
+.product-details {
+    flex: 1;
+    padding: 20px; /* Agrega más espacio alrededor de los detalles */
+    background-color: #f9f9f9; /* Fondo suave para los detalles */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Título del producto */
+.product-details h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333; /* Color oscuro para el título */
+    margin-bottom: 10px; /* Separación con los siguientes elementos */
+    text-transform: capitalize; /* Primera letra de cada palabra en mayúscula */
+}
+
+/* Párrafos de detalles */
+.product-details p {
+    font-size: 16px;
+    color: #555; /* Color más suave para el texto */
+    line-height: 1.6; /* Espaciado entre líneas */
+    margin-bottom: 8px; /* Separación entre párrafos */
+}
+
+/* Elementos destacados dentro de los párrafos */
+.product-details p strong {
+    color: #222; /* Color más oscuro para las etiquetas (como Descripción, Precio, etc.) */
+    font-weight: bold;
+}

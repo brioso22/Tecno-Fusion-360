@@ -1,0 +1,249 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/tiendaFBC.css'%}">
+    <link rel="stylesheet" href="{% static 'css/targetaProd.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <title>Document</title>
+    <style>
+
+        .product-img {
+            width: 100%; /* Asegúrate de que las imágenes se adapten al contenedor */
+            height: auto; /* Mantén la proporción original */
+        }
+        
+        /* Estilo para el nombre del producto */
+        .carousel-caption h5 {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para mejorar la legibilidad */
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        
+        .carousel-item.active img {
+            transform: scale(1); /* Asegura que la imagen no se agrande ni se reduzca durante la transición */
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-cart-container">
+    <form method="get" action="{% url 'tienda' %}">
+        <div class="group">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                <g>
+                    <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                </g>
+            </svg>
+            <input placeholder="Search" type="search" class="input" name="q" value="{{ query }}">
+        </div>
+    </form>
+        <!-- Botón de Carrito -->
+        <button data-quantity="0" class="btn-cart" onclick="openPopup()">
+            <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
+                <title>icon-cart</title>
+                <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
+            </svg>
+            <span class="quantity"></span>
+        </button>
+    
+</div>
+
+<div class="mydict">
+    <div>
+        <form method="GET" id="filter-form">
+            {% csrf_token %}
+            <label>
+                <input type="radio" name="categoria" value="todos" {% if categoria == 'todos' %}checked{% endif %} onchange="this.form.submit()">
+                <span>Todos</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Motherboard" {% if categoria == 'Motherboard' %}checked{% endif %} onchange="this.form.submit()">
+                <span>Motherboard</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="RAM" {% if categoria == 'RAM' %}checked{% endif %} onchange="this.form.submit()">
+                <span>RAM</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Almacenamiento" {% if categoria == 'Almacenamiento' %}checked{% endif %} onchange="this.form.submit()">
+                <span>Almacenamiento</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Teclados" {% if categoria == 'Teclados' %}checked{% endif %} onchange="this.form.submit()">
+                <span>Teclados</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Mouses" {% if categoria == 'Mouses' %}checked{% endif %} onchange="this.form.submit()">
+                <span>Mouses</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Monitores" {% if categoria == 'Monitores' %}checked{% endif %} onchange="this.form.submit()">
+                <span>Monitores</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Sillas" {% if categoria == 'Sillas' %}checked{% endif %} onchange="this.form.submit()">
+                <span>Sillas</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Escritorios" {% if categoria == 'Escritorios' %}checked{% endif %} onchange="this.form.submit()">
+                <span>Escritorios</span>
+            </label>
+            <!-- Radio Button para "Otros" -->
+            <label>
+                <input type="radio" name="categoria" value="Otros" {% if categoria == 'Otros' %}checked{% endif %} onchange="showFilterModal()">
+                <span>Otros</span>
+            </label>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para el filtro -->
+<div id="filterModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close-btn">&times;</span>
+        <h2>Filtrar Productos</h2>
+        
+        <div class="filter-option">
+            <label for="priceRange">Rango de Precio:</label>
+            <input type="range" id="priceRange" name="price" min="0" max="500" value="100" class="slider">
+            <p>Precio: $<span id="priceValue">100</span></p>
+        </div>
+
+        <div class="filter-option">
+            <label for="brand">Marca:</label>
+            <select id="brand" name="brand">
+                <option value="marca1">Marca 1</option>
+                <option value="marca2">Marca 2</option>
+                <option value="marca3">Marca 3</option>
+                <option value="marca4">Marca 4</option>
+            </select>
+        </div>
+
+        <button id="applyFilters" class="apply-btn">Aplicar Filtros</button>
+    </div>
+</div>
+
+
+
+<!-- Carrusel de productos -->
+<div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"> <!-- Intervalo de 3 segundos entre cada imagen -->
+    <div class="carousel-inner">
+      {% for producto in productos %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ producto.imagen.url }}" class="d-block w-100" alt="{{ producto.nombre }}">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ producto.nombre }}</h5>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- Botones de control (prev y next) si deseas que el usuario pueda cambiar la imagen manualmente) -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+
+<!--aqui es donde se muestra los productos -->
+
+<div class="productos">
+    {% for producto in productos %}
+    <li class="producto">
+        <div class="product-card" id="productCard" data-producto-id="{{ producto.id }}">
+            <!-- Imagen del Producto -->
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="product-img" id="openModal">
+
+            <!-- Información del Producto -->
+            <div class="product-info">
+                <h3>{{ producto.nombre }}</h3>
+                <p>Descripción: {{ producto.descripcion }}</p>
+                <div class="price">${{ producto.precio }}</div>
+
+                <!-- Botones de interacción -->
+                <div class="icon-buttons">
+                    <!-- Botón de Comentario -->
+                    <button class="icon-btn bookmarkBtn" onclick="event.stopPropagation();">
+                        <span class="IconContainer">
+                            <svg fill="white" viewBox="0 0 512 512" height="1em">
+                                <path d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160s-83.3-160-208-160S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8 .2-1.6 .3-2.4 .5c-4.4 .8-8.7 1.5-13.2 1.9c-.2 0-.5 .1-.7 .1c-5.1 .5-10.2 .8-15.3 .8c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2 .2-.3 .3-.5z"></path>
+                            </svg>
+                        </span>
+                        <p class="text">Comment</p>
+                    </button>
+
+                    <!-- Botón de Agregar al Carrito -->
+                    <form action="{% url 'agregar_al_carrito' producto.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="icon-btn cartBtn" onclick="event.stopPropagation();">
+                            <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                            </svg>
+                            ADD TO CART
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- Pestaña en la parte inferior de la tarjeta 
+            <div class="product-tab">
+                {% include 'calificacion.html' %}
+            </div>-->
+        </div>
+    </li>
+    {% endfor %}
+</div>
+
+<!-- Popup de Carrito -->
+<div class="popup" id="popup" style="display: none;">
+    <button class="continue-btn"onclick="window.location.href='{% url 'compra' %}'">
+        <span>Continue</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 74 74" height="34" width="34">
+            <circle stroke-width="3" stroke="black" r="35.5" cy="37" cx="37"></circle>
+            <path fill="black" d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"></path>
+        </svg>
+    </button>
+
+    <h2>Carrito de Compras</h2>
+<div class="product-container">
+    {% if carrito %}
+        {% for item in carrito %}
+            <div class="cart-item">
+                <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" class="product-image">
+                <div class="price">{{ item.producto.nombre }} - ${{ item.producto.precio }}</div>
+                <div class="quantity-container">
+                    <div class="quantity">Cantidad: {{ item.cantidad_stock }}</div>
+                    <button class="tooltip">
+                        <span class="tooltiptext">delete</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No hay productos en el carrito.</p>
+    {% endif %}
+
+    <button class="close-btn" onclick="closePopup()">Cerrar</button>
+</div>
+</div>
+
+<script src="{% static 'js/produc.js' %}"></script>
+<script src="{% static 'js/vista.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+body {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: contents;
+} 
+h1 {
+    text-align: center;
+}
+
+#barra-busqueda {
+    width: 80%;
+    height: 50px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buscar {
+    width: 90%;
+    height: 80%;
+    border-radius: 30px;
+    padding: 0 10px;
+}
+
+#search {
+    height: 95%;
+    width: 13%;
+    border-radius: 30px;
+    margin-left: -4%;
+    color: white;
+    font-weight: bold;
+    background-color: #1B061B;
+    border: none;
+    cursor: pointer;
+}
+
+.opcion {
+    display: flex;
+    width: 100%;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    border-radius: 100px;
+    border: solid 2px black;
+    width: 250px;
+    height: 43px;
+    margin: 0 50px;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #1B061B; 
+    color: white; 
+}
+
+iframe {
+    margin: -1px; 
+    width: 100%; 
+    height: 300px; /* Ajustar altura inicial */
+    transition: height 0.3s ease; /* Añadir transición para suavizar el cambio de altura */
+}
+
+.pg {
+    display: flex;
+}
+
+.referencias {
+    display: flow-root;
+    width: 30em; 
+    height: 300px;
+    border-right: 1px solid black;
+    margin: 10px 20px 0 0; 
+}
+
+.contenido {
+    flex: 1; 
+}

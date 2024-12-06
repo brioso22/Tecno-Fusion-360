@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/garantiaStyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/borde_inferior.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="nav">
+        {% include "NaveBar.html" %}
+    </div>
+    <section class="formulario-garantia">
+        <h2>Formulario de Garantía</h2>
+        <form id="contactForm" method="POST" action="{% url 'formulario_garantia' %}">
+            {% csrf_token %}
+            <input type="text" name="nombre" placeholder="Nombre completo del cliente" required>
+            <input type="text" name="factura" placeholder="Código de Factura" required>
+            <input type="text" name="doc" placeholder="Documento de identidad" required>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <input type="text" name="telefono" placeholder="Número de teléfono" required>
+            <textarea name="mensaje" placeholder="Descripción y falla de los productos" required></textarea>
+            <label>
+                <input type="checkbox" name="terms" required>
+                Acepto los <a href="#">Términos y Condiciones</a>
+            </label>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.all.min.js"></script>
+    
+    <script>
+        // Escucha el envío del formulario
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar el envío para validar
+            
+            // Aquí se debe hacer el proceso de validación o envío de formulario
+            // En este caso, vamos a mostrar la ventana emergente sin validación del lado del servidor
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Formulario enviado',
+                text: '¡Tu solicitud ha sido enviada correctamente!',
+                showConfirmButton: false,
+                timer: 1500 // Desaparece después de 1.5 segundos
+            }).then(() => {
+                // Simula el envío del formulario después de la alerta
+                event.target.submit();
+            });
+        });
+    </script>
+
+    <br><br>
+    {% include "footer.html" %}
+</body>
+</html>

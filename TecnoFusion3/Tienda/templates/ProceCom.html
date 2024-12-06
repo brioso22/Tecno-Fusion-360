@@ -1,0 +1,201 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Pago con Tarjeta</title>
+    <link rel="stylesheet" href="{% static 'css/ProceCom.css' %}">
+
+
+
+    <style>
+        /*boton back*/
+button {
+    display: flex;
+    height: 3em;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee4b; /* Cambia este color de fondo */
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: none;
+    background: #3498db; /* Color específico para el botón */
+    color: #fff; /* Color del texto */
+}
+
+button > svg {
+    fill: #fff; /* Color específico para la flecha SVG */
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+}
+
+button:hover > svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+button:hover {
+    box-shadow: 9px 9px 33px #2980b9, -9px -9px 33px #ffffff; /* Colores de la sombra al hacer hover */
+    transform: translateY(-2px);
+}
+
+
+
+
+
+
+
+
+/* Contenedor principal */
+.product-selection {
+    margin: 20px auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo del mensaje */
+.selection-message {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    padding: 10px;
+}
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class="back-button-container" >
+        <button onclick="window.location.href='{% url 'tienda' %}'">
+          <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024"><path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path></svg>
+          <span>Back</span>
+        </button>
+    </div>
+
+
+
+    <div class="product-selection">
+        <p class="selection-message">Por favor, seleccione los productos que desea incluir en su compra.</p>
+    </div>
+    
+   
+    
+
+
+    <div class="container">
+        <div class="producto-vista">
+            {% if carrito %}
+                {% for item in carrito %}
+                    <div class="cart-item">
+                        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">{{ item.producto.nombre }}</div>
+                            <div class="price">${{ item.producto.precio }}</div>
+                            <div class="quantity">Cantidad: {{ item.cantidad_stock }}</div>
+                        </div>
+                        <div class="toggler">
+                            <input 
+                                id="product-{{ item.producto.id }}" 
+                                class="product-checkbox"
+                                type="checkbox" 
+                                name="selected_products" 
+                                value="{{ item.producto.id }}"
+                                {% if item.producto.is_selected %} checked {% endif %} 
+                            >
+                            <label for="product-{{ item.producto.id }}">
+                                <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                                    <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5"></polyline>
+                                </svg>
+                                <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                                    <line class="path line" x1="34.4" y1="34.4" x2="95.8" y2="95.8"></line>
+                                    <line class="path line" x1="95.8" y1="34.4" x2="34.4" y2="95.8"></line>
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay productos en el carrito.</p>
+            {% endif %}
+        </div>
+    
+        <div class="formulario-pago">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Información común -->
+                <h3>Información de Contacto</h3>
+                <input type="text" name="nombre_completo" placeholder="Nombre completo" required>
+                <input type="email" name="correo_electronico" placeholder="Correo electrónico" required>
+                <input type="tel" name="numero_telefono" placeholder="Número de teléfono" required>
+    
+                <h3>Dirección de Envío</h3>
+                <input type="text" name="departamento" placeholder="Departamento" required>
+                <input type="text" name="ciudad" placeholder="Ciudad" required>
+                <input type="text" name="direccion" placeholder="Dirección" required>
+                <input type="text" name="codigo_postal" placeholder="Código Postal (opcional)">
+    
+                <h3>Método de Pago</h3>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" id="payment-cash" name="payment-method" value="cash" required>
+                        <label for="payment-cash">Pago Contra Entrega</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="payment-online" name="payment-method" value="online">
+                        <label for="payment-online">Pago en Línea</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="payment-transfer" name="payment-method" value="transfer">
+                        <label for="payment-transfer">Transferencia</label>
+                    </div>
+                </div>
+    
+                <!-- Formulario de Pago en Línea -->
+                <div id="online-payment-form" class="online-payment-form" style="display: none;">
+                    <h3>Formulario de Pago en Línea</h3>
+                    <input type="text" name="numero_tarjeta" placeholder="Número de tarjeta">
+                    <input type="text" name="fecha_vencimiento" placeholder="Fecha de vencimiento (MM/AA)">
+                    <input type="text" name="codigo_seguridad" placeholder="Código de seguridad (CVV)">
+                    <input type="text" name="nombre_tarjeta" placeholder="Nombre en la tarjeta">
+                </div>
+    
+                <!-- Formulario para Transferencia Bancaria -->
+                <div id="transfer-form" class="transfer-form" style="display: none;">
+                    <h3>Formulario de Transferencia Bancaria</h3>
+                    <input type="text" name="nombre_banco" placeholder="Nombre del banco">
+                    <input type="text" name="numero_cuenta" placeholder="Número de cuenta">
+                    <input type="text" name="titular_cuenta" placeholder="Titular de la cuenta">
+                    <input type="number" name="monto_transferido" placeholder="Monto transferido">
+                    <input type="date" name="fecha_transferencia">
+                    <input type="text" name="numero_referencia" placeholder="Número de referencia">
+                    <input type="file" name="comprobante">
+                </div>
+    
+                <!-- Productos seleccionados -->
+                <input type="hidden" id="selected-products" name="selected_products" value="">
+                <!-- Botón para enviar el formulario -->
+                <button type="submit" class="submit-cash">Confirmar Pedido</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <script src="{% static 'js/ProceCom.js'%}"></script>
+</body>
+
+</html>
+

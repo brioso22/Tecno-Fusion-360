@@ -1,0 +1,194 @@
+
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+   
+    <style>
+        body {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: contents;
+} 
+h1 {
+    text-align: center;
+}
+
+#barra-busqueda {
+    width: 80%;
+    height: 50px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.opcion {
+    display: flex;
+    width: 100%;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    border-radius: 100px;
+    border: solid 2px black;
+    width: 250px;
+    height: 43px;
+    margin: 0 50px;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #1B061B; 
+    color: white; 
+}
+
+iframe {
+    margin: -1px; 
+    width: 100%; 
+    height: 300px; /* Ajustar altura inicial */
+    transition: height 0.3s ease; /* Añadir transición para suavizar el cambio de altura */
+}
+
+.pg {
+    display: flex;
+}
+
+.referencias {
+    display: flow-root;
+    width: 30em; 
+    height: 300px;
+    border-right: 1px solid black;
+    margin: 10px 20px 0 0; 
+}
+
+.contenido {
+    flex: 1; 
+}
+    </style>
+</head>
+<body>
+    {% include "NaveBar.html" %}
+    
+    <br>
+    <h1>¿EN QUÉ PODEMOS AYUDARTE?</h1>
+    <br>
+    
+    
+    <br><br><br><br>
+    
+    <div class="opcion">
+        <div class="circle" id="uso-plataforma">USO DE LA PLATAFORMA</div>
+        <div class="circle" id="nuestros-equipos">NUESTROS EQUIPOS</div>
+        <div class="circle" id="sobre-nosotros">SOBRE NOSOTROS</div>
+    </div>
+    
+    <br><br><br>
+    
+    <div style="display: none;">
+        <div id="iniciode_f">
+            {% include 'iniciode_f.html' %}
+        </div>
+    
+        <div id="contenido-uso-plataforma">
+            {% include 'index2.html' %}
+        </div>
+        <div id="contenido-nuestros-equipos">
+            {% include 'index3.html' %}
+        </div>
+        <div id="contenido-sobre-nosotros">
+            {% include 'index4.html' %}
+        </div>
+    </div>
+    
+    <iframe id="miIframe" class="iframe"></iframe>
+    
+    <script>
+        const circles = document.querySelectorAll('.circle');
+        const iframe = document.getElementById('miIframe');
+    
+        // Función para cargar el contenido inicial
+        function loadInitialContent() {
+            const initialContent = document.getElementById('iniciode_f').innerHTML;
+            const initialHeight = '500px'; // Ajusta la altura como necesites
+    
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.open();
+            doc.write(initialContent);
+            doc.close();
+    
+            iframe.style.height = initialHeight; // Cambiar la altura del iframe
+        }
+    
+        // Cargar el contenido inicial al cargar la página
+        loadInitialContent();
+    
+        circles.forEach(circle => {
+            circle.addEventListener('click', function() {
+                const selectedId = this.id;
+                let content;
+                let newHeight;
+    
+                switch (selectedId) {
+                    case 'uso-plataforma':
+                        content = document.getElementById('contenido-uso-plataforma').innerHTML;
+                        newHeight = '7500px'; // Altura para el primer contenido
+                        break;
+                    case 'nuestros-equipos':
+                        content = document.getElementById('contenido-nuestros-equipos').innerHTML;
+                        newHeight = '1200px'; // Altura para el segundo contenido (la mitad)
+                        break;
+                    case 'sobre-nosotros':
+                        content = document.getElementById('contenido-sobre-nosotros').innerHTML;
+                        newHeight = '800px'; // Altura para el tercer contenido (la mitad de la mitad)
+                        break;
+                    default:
+                        content = '';
+                        newHeight = '0px'; // Establecer altura a 0 si no hay contenido
+                }
+    
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                doc.open();
+                doc.write(content);
+                doc.close();
+    
+                iframe.style.height = newHeight; // Cambiar la altura del iframe
+    
+                circles.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+    {%include "footer.html"%}
+
+
+
+ <script type="text/javascript">
+     (function(d, t) {
+         var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+         v.onload = function() {
+           window.voiceflow.chat.load({
+             verify: { projectID: '67334eec119fea36e431796e' },
+             url: 'https://general-runtime.voiceflow.com',
+             versionID: 'production'
+           });
+         }
+         v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+     })(document, 'script');
+   </script>
+    <body>
+    </html>

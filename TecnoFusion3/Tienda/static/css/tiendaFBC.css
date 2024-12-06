@@ -1,0 +1,410 @@
+/* Estilos generales para el body */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+/* Contenedor de búsqueda y carrito */
+.search-cart-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Grupo de la barra de búsqueda */
+.group {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    margin-right: 10px;
+}
+
+/* Estilos de la entrada de búsqueda */
+.input {
+    flex: 1;
+    height: 40px;
+    line-height: 28px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: .3s ease;
+    max-width: 100%;
+}
+
+.input::placeholder {
+    color: #9e9ea7;
+}
+
+/* Estilos al enfocar el input o al pasar el mouse */
+.input:focus, .input:hover {
+    outline: none;
+    border-color: rgba(234, 76, 137, 0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgb(234, 76, 137, 0.1);
+}
+
+/* Estilos del icono */
+.icon {
+    position: absolute;
+    left: 1rem;
+    fill: #9e9ea7;
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Icono de compra */
+.btn-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: transparent;
+    position: relative;
+}
+
+.btn-cart::after {
+    content: attr(data-quantity);
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    font-size: 15px;
+    color: rgb(22, 20, 20);
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s linear;
+    top: 115%;
+}
+
+.icon-cart {
+    width: 24.38px;
+    height: 30.52px;
+    transition: .2s linear;
+}
+
+.icon-cart path {
+    fill: rgb(240, 8, 8);
+    transition: .2s linear;
+}
+
+.btn-cart:hover > .icon-cart {
+    transform: scale(1.2);
+}
+
+.btn-cart:hover > .icon-cart path {
+    fill: rgb(186, 34, 233);
+}
+
+.btn-cart:hover::after {
+    visibility: visible;
+    opacity: 1;
+    top: 105%;
+}
+
+/* Filtro */
+:focus {
+    outline: 0;
+    border-color: #2260ff;
+    box-shadow: 0 0 0 4px #b5c9fc;
+}
+
+.mydict div {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    justify-content: center;
+}
+
+.mydict input[type="radio"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.mydict input[type="radio"]:checked + span {
+    box-shadow: 0 0 0 0.0625em #0043ed;
+    background-color: #dee7ff;
+    z-index: 1;
+    color: #0043ed;
+}
+
+label span {
+    display: block;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 0.375em .75em;
+    position: relative;
+    margin-left: .0625em;
+    box-shadow: 0 0 0 0.0625em #b5bfd9;
+    letter-spacing: .05em;
+    color: #3e4963;
+    text-align: center;
+    transition: background-color .5s ease;
+}
+
+label:first-child span {
+    border-radius: .375em 0 0 .375em;
+}
+
+label:last-child span {
+    border-radius: 0 .375em .375em 0;
+}
+
+/* Filtro */
+.mydict {
+    z-index: 10; /* Ajusta el índice para estar detrás de la ventana emergente */
+}
+
+.mydict input[type="radio"]:checked + span {
+    z-index: 10; /* Asegúrate de que los radio buttons y el texto estén detrás */
+}
+
+label span {
+    z-index: 10; /* Ajuste para mantener los elementos de filtro en segundo plano */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo general para la ventana emergente */
+.modal {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    z-index: 1; /* Aparece por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro transparente */
+    padding-top: 60px;
+}
+
+/* Estilo para el contenido de la ventana */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    z-index: 2; /* Asegura que el contenido modal quede encima */
+}
+
+/* Estilo para el botón de cerrar */
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    cursor: pointer;
+}
+
+/* Estilo de las opciones del filtro */
+.filter-option {
+    margin-bottom: 20px;
+}
+
+.filter-option label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.filter-option select,
+.filter-option input[type="range"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+/* Estilo para el botón de aplicar filtros */
+.apply-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.apply-btn:hover {
+    background-color: #45a049;
+}
+
+/* Estilos adicionales para el filtro de rango */
+.slider {
+    padding: 30px;
+    border-radius: 3px;
+    position: relative; /* Cambiar de absolute a relative */
+    background-color: rgb(255, 255, 255);
+    width: 90%; /* Asegura que ocupe un buen espacio dentro del modal */
+    max-width: 350px; /* Ancho máximo para no exceder el tamaño del modal */
+    margin-top: 20px;
+    z-index: 3; /* Asegura que el slider no se sobreponga a otros elementos */
+}
+
+.range-slider {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    margin-top: -10px;
+    font-size: 18px; /* Ajustar tamaño de la fuente */
+    color: rgb(7, 77, 189);
+    margin-bottom: 20px;
+}
+
+.range-slider .rangeValues {
+    display: block;
+    box-shadow: 0 0 20px rgba(0,139,253,0.25);
+    padding: 20px;
+    font-size: 22px;
+    margin-bottom: 35px;
+}
+
+input[type=range] {
+    --webkit-appearance: none;
+    border: 1px solid white;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    position: relative;
+    margin-top: 10px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #0273a0;
+    margin-top: -6px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+/* Estilos para el rango en el primer bloque de código (slider fuera del modal) */
+.range-slider {
+    width: 300px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+input[type=range] {
+    --webkit-appearance: none;
+    border: 1px solid white;
+    width: 300px;
+    position: absolute;
+    left: 0;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #0273a0;
+    margin-top: -6px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos</title>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contactanos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/borde_inferior.css' %}">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="nav">
+        {% include "NaveBar.html" %}
+    </div>
+    <section class="formulario-contacto">
+        <h2>Formulario de Contacto</h2>
+        <form id="contactForm" method="POST" action="{% url 'contactanos' %}">
+            {% csrf_token %}
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+            <input type="email" name="email" id="email" placeholder="Correo electrónico" required>
+            <input type="tel" name="telefono" id="telefono" placeholder="Teléfono" required>
+            <textarea name="mensaje" id="mensaje" placeholder="Escribe tu mensaje aquí" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar el envío para mostrar la alerta primero
+            
+            // Validar si los campos están completos
+            if (document.getElementById("nombre").value && 
+                document.getElementById("email").value && 
+                document.getElementById("telefono").value && 
+                document.getElementById("mensaje").value) {
+                
+                // Mostrar la alerta de éxito
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Formulario enviado!',
+                    text: 'Tu mensaje ha sido enviado correctamente.',
+                    showConfirmButton: false,
+                    timer: 1500 // Desaparece después de 1.5 segundos
+                }).then(() => {
+                    // Enviar el formulario después de que el usuario vea la alerta
+                    event.target.submit();
+                });
+            } else {
+                // Si falta algún campo
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Oops!',
+                    text: 'Por favor completa todos los campos.',
+                });
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+              window.voiceflow.chat.load({
+                verify: { projectID: '67334eec119fea36e431796e' },
+                url: 'https://general-runtime.voiceflow.com',
+                versionID: 'production'
+              });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
+
+    <br>
+    <br>
+    <footer>
+     {% include "footer.html" %}
+    </footer>
+</body>
+</html>

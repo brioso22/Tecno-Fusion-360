@@ -1,0 +1,46 @@
+{% extends "account/base_manage.html" %}
+{% load allauth i18n %}
+
+{% block head_title %}
+    {% trans "Sign Out" %}
+{% endblock head_title %}
+
+{% block extra_head %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleout.css' %}">
+<style>
+    /* Establece la imagen de fondo en todo el body */
+    body {
+        background-image: url('{% static "img/prue2.jfif" %}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
+{% endblock extra_head %}
+
+{% block content %}
+    <div class="form-container">
+        {% element h1 %}
+            {% trans "Sign Out" %}
+        {% endelement %}
+        {% element p %}
+            {% trans 'Are you sure you want to sign out?' %}
+        {% endelement %}
+        
+        {% url 'account_logout' as action_url %}
+        {% element form method="post" action=action_url no_visible_fields=True %}
+            {% slot body %}
+                {% csrf_token %}
+                {{ redirect_field }}
+            {% endslot %}
+            {% slot actions %}
+                {% element button type="submit" %}
+                    {% trans 'Sign Out' %}
+                {% endelement %}
+            {% endslot %}
+        {% endelement %}
+    </div>
+{% endblock content %}

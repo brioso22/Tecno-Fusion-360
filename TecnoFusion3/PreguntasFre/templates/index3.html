@@ -1,0 +1,127 @@
+<style>
+    .pg {
+        display: flex;
+    }
+    
+    .referencias {
+        display: flow-root;
+        width: 30em;
+        height: 1000px;
+        border-right: 1px solid black;
+        margin: 10px 20px 0 0;
+    }
+    
+    .contenido {
+        flex: 1;
+        font-family: Arial, sans-serif;
+    }
+    
+    .contenido h2, .contenido h1 {
+        cursor: pointer;
+        font-size:25px;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .contenido ul {
+        list-style-type: circle;
+        margin-left: 20px;
+    }
+
+    .contenido ul ul {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+</style>
+
+<script>
+    function toggleContent(id) {
+        var element = document.getElementById(id);
+        if (element.classList.contains("hidden")) {
+            element.classList.remove("hidden");
+        } else {
+            element.classList.add("hidden");
+        }
+    }
+</script>
+
+<body>
+    <div class="pg">
+        <div class="referencias">
+            <ol>
+                <li>
+                    <a href="#t1"><h5 onclick="toggleContent('t1Content')">¿Qué es un dispositivo reacondicionado?</h5></a>
+                    <ul>
+                        <li><a href="#t1.1">Definición</a></li>
+                        <li><a href="#t1.2">Proceso de reacondicionamiento</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#t2"><h5 onclick="toggleContent('t2Content')">¿Cuál es la diferencia entre un producto nuevo y uno reacondicionado?</h5></a>
+                </li>
+                <li>
+                    <a href="#t3"><h5 onclick="toggleContent('t3Content')">¿Los productos reacondicionados tienen garantía?</h5></a>
+                    <ul>
+                        <li><a href="#t3.1">Garantía estándar</a></li>
+                        <li><a href="#t3.2">Garantía extendida (opcional)</a></li>
+                        <li><a href="#t3.3">Condiciones de la garantía</a></li>
+                        <li><a href="#t3.4">Proceso de reclamación</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#t4"><h5 onclick="toggleContent('t4Content')">¿Qué métodos de pago aceptan?</h5></a>
+                    <ul>
+                        <li><a href="#t4.1">Tarjetas de crédito y débito</a></li>
+                        <li><a href="#t4.2">Transferencias bancarias</a></li>
+                        <li><a href="#t4.3">Pagos electrónicos</a></li>
+                        <li><a href="#t4.4">Pagos en cuotas (si aplica)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#t5"><h5 onclick="toggleContent('t5Content')">¿Cómo se realiza el envío?</h5></a>
+                </li>
+            </ol>
+        </div>
+
+        <div class="contenido">
+            <h1 id="t1" onclick="toggleContent('t1Content')">¿Qué es un dispositivo reacondicionado?</h1>
+            <div id="t1Content" class="hidden">
+                <p id="t1.1">Un dispositivo reacondicionado es aquel que ha sido devuelto por varias razones, inspeccionado, reparado y restaurado a un estado funcional.</p>
+                <h2 id="t1.2">Proceso de reacondicionamiento</h2>
+                <p>Incluye la inspección inicial, reparación de componentes, pruebas de funcionamiento y certificación de calidad.</p>
+            </div>
+
+            <h1 id="t2" onclick="toggleContent('t2Content')">¿Cuál es la diferencia entre un producto nuevo y uno reacondicionado?</h1>
+            <div id="t2Content" class="hidden">
+                <p>Los reacondicionados han sido utilizados antes, restaurados a un estado funcional y ofrecen precios más bajos.</p>
+            </div>
+
+            <h1 id="t3" onclick="toggleContent('t3Content')">¿Los productos reacondicionados tienen garantía?</h1>
+            <div id="t3Content" class="hidden">
+                <ul>
+                    <li id="t3.1">Garantía estándar: Cubierta en todos los productos reacondicionados.</li>
+                    <li id="t3.2">Garantía extendida (opcional): Se puede adquirir al momento de la compra.</li>
+                    <li id="t3.3">Condiciones de la garantía: Varían según el producto.</li>
+                    <li id="t3.4">Proceso de reclamación: Contacto con servicio al cliente.</li>
+                </ul>
+            </div>
+
+            <h1 id="t4" onclick="toggleContent('t4Content')">¿Qué métodos de pago aceptan?</h1>
+            <div id="t4Content" class="hidden">
+                <ul>
+                    <li id="t4.1">Tarjetas de crédito y débito</li>
+                    <li id="t4.2">Transferencias bancarias</li>
+                    <li id="t4.3">Pagos electrónicos</li>
+                    <li id="t4.4">Pagos en cuotas (si aplica)</li>
+                </ul>
+            </div>
+
+            <h1 id="t5" onclick="toggleContent('t5Content')">¿Cómo se realiza el envío?</h1>
+            <div id="t5Content" class="hidden">
+                <p>El envío se realiza mediante empresas de paquetería y te proporcionamos un número de seguimiento.</p>
+            </div>
+        </div>
+    </div>
+</body>

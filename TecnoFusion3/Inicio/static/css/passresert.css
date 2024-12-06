@@ -1,0 +1,151 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("{% static 'img/prue2.jfif' %}") no-repeat center center/cover;
+}
+
+.form-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    background: rgba(20, 20, 50, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #ffb3ff;
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+    
+}
+
+p {
+    color: #eee;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+input[type="email"]
+ {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    background: rgba(30, 30, 60, 0.9);
+    color: #fff;
+    outline: none;
+}
+
+.show-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #ff8c00, #ff00ff);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #ff6f00, #d400d4);
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    color: #ddd;
+    font-size: 14px;
+}
+
+.options a {
+    color: #ff8c00;
+    text-decoration: none;
+}
+
+.or {
+    margin: 15px 0;
+    color: #ccc;
+    text-align: center;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.social-btn:hover {
+    background: linear-gradient(90deg, #00d4ff, #ff8c00);
+    transform: scale(1.05);
+}
+
+strong{
+    color: #fff;
+    visibility:hidden;
+}
+ul{
+    display: flex;
+    list-style: none;
+    margin: 0rem 1rem 0rem 1rem;
+    visibility: hidden;
+
+}
+li{
+    margin: 0rem 1.5rem 0 1.5rem;
+    visibility: hidden;
+
+}
+a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+#id_password_helptext{
+    margin: 2rem;
+}

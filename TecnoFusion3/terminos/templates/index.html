@@ -1,0 +1,249 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Políticas de Uso</title>
+    <!-- Vinculando Bootstrap 4 para mejorar la apariencia -->
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <style>
+        /* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los encabezados */
+h3 {
+    color: #2a7ae4;
+    font-size: 1.6em;
+    border-bottom: 2px solid #d4e3f8;
+    padding-bottom: 5px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Estilo para los párrafos */
+p {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Efecto de resaltado para palabras clave */
+p strong {
+    color: #2a7ae4;
+    font-weight: bold;
+}
+
+/* Estilo de los contenedores de secciones */
+.section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f3f6fb;
+    border-left: 4px solid #2a7ae4;
+    border-radius: 5px;
+}
+
+/* Efecto de hover en secciones */
+.section:hover {
+    background-color: #e9f1fc;
+}
+
+/* Espaciado interno para la caja principal */
+.container .section {
+    padding-left: 20px;
+}
+
+/* Enlaces */
+a {
+    color: #2a7ae4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Adaptación para dispositivos móviles */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h3 {
+        font-size: 1.4em;
+    }
+}
+
+    </style>
+ 
+</head>
+<body>
+
+    <!-- Incluir la barra de navegación aquí -->
+    {% include "NaveBar.html" %}
+
+    <!-- Contenedor principal con las políticas -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Columna para los temas -->
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#propósito" class="list-group-item list-group-item-action">Propósito de la Plataforma</a>
+                    <a href="#actividades" class="list-group-item list-group-item-action">Actividades Prohibidas</a>
+                    <a href="#privacidad" class="list-group-item list-group-item-action">Política de Privacidad</a>
+                    <a href="#contenido" class="list-group-item list-group-item-action">Contenido Generado por el Usuario</a>
+                    <a href="#seguridad" class="list-group-item list-group-item-action">Seguridad de la Cuenta</a>
+                    <a href="#consecuencias" class="list-group-item list-group-item-action">Consecuencias del Incumplimiento</a>
+                </div>
+            </div>
+
+            <!-- Columna para el contenido -->
+            <div class="col-md-9">
+                <div id="propósito" class="mt-4">
+                    <h3>1. Propósito de la Plataforma</h3>
+                        <p>
+                            Nuestra Plataforma se especializa en la compra, venta y reparación de equipos electrónicos, brindando un entorno seguro y accesible donde los usuarios pueden adquirir productos de alta calidad y acceder a servicios técnicos profesionales. Nuestro objetivo principal es ofrecer una experiencia integral que permita a los clientes satisfacer sus necesidades tecnológicas sin preocupaciones.
+                        </p>
+                        <p>
+                            A través de nuestra Plataforma, los usuarios tienen la posibilidad de adquirir una amplia gama de productos electrónicos, que incluyen computadoras de escritorio, laptops, tablets, accesorios, y otros componentes esenciales para sus dispositivos. Nos esforzamos por garantizar que cada artículo disponible en nuestra Plataforma sea auténtico, de calidad comprobada, y que cuente con el respaldo de marcas reconocidas en el mercado.
+                        </p>
+                        <p>
+                            Además, nuestra Plataforma ofrece servicios especializados de reparación, diseñados para atender diversos problemas técnicos que los dispositivos electrónicos puedan presentar. Los usuarios pueden crear solicitudes de reparación, recibir diagnósticos detallados de sus equipos, y obtener un historial completo de reparaciones previas. Nuestro equipo técnico altamente capacitado está comprometido a proporcionar soluciones rápidas y efectivas, utilizando herramientas y metodologías actualizadas para asegurar la mayor precisión en cada intervención.
+                        </p>
+                        <p>
+                            Entendemos que el soporte técnico no solo implica reparaciones, sino también orientación y asistencia constante. Por esta razón, ponemos a disposición de los usuarios una biblioteca de recursos educativos, que incluye artículos y guías paso a paso para ayudarles a comprender el funcionamiento, cuidado y optimización de sus dispositivos. Este recurso es especialmente útil para quienes desean maximizar la vida útil de sus productos y aprender prácticas de mantenimiento preventivo.
+                        </p>
+                        <p>
+                            Nuestra misión es promover un entorno en el que los usuarios puedan confiar en la autenticidad de los productos y en la experiencia de nuestros servicios de reparación. Cualquier uso de nuestra Plataforma que no esté alineado con estos objetivos, como el mal uso de los servicios o la intención de causar daños a otros usuarios o al sistema, será considerado una violación de esta política y podría dar lugar a la suspensión de la cuenta o a la implementación de medidas de seguridad adicionales.
+                        </p>
+                        
+                        </div>
+
+                <div id="actividades" class="mt-4">
+                    <h3>2. Actividades Prohibidas</h3>
+                    <p>
+                        Para proteger la integridad y seguridad de nuestra Plataforma, hemos establecido normas estrictas que prohíben ciertas conductas y actividades. Estas restricciones buscan crear un ambiente seguro para todos los usuarios, prevenir actividades ilícitas, y garantizar que los servicios se utilicen únicamente con fines legítimos y conforme a nuestros valores y principios.
+                    </p>
+                    <p>
+                        En primer lugar, prohibimos la falsificación de identidad y cualquier forma de fraude. Esto incluye la creación de cuentas con información falsa o incompleta, así como la suplantación de identidad para obtener beneficios indebidos. Los usuarios deben proporcionar datos precisos al registrarse y durante el uso de los servicios, ya que cualquier intento de engañar o manipular nuestra plataforma puede resultar en la suspensión o terminación inmediata de la cuenta.
+                    </p>
+                    <p>
+                        También está prohibida la manipulación de información en los servicios de reparación. No se permite el envío de dispositivos para reparación que no sean de propiedad del usuario, ni el intento de modificar o alterar el estado de los dispositivos para obtener reparaciones sin costo o descuentos no justificados. Nos reservamos el derecho de verificar la procedencia y condición de los dispositivos antes de realizar cualquier intervención técnica.
+                    </p>
+                    <p>
+                        Otro aspecto prohibido es el intento de acceso no autorizado a nuestras bases de datos, sistemas o cuentas de otros usuarios. Los intentos de hackeo, el uso de credenciales robadas, el phishing y cualquier forma de elusión de los sistemas de seguridad serán tratados como violaciones graves. Estas acciones no solo ponen en riesgo a la Plataforma, sino también la privacidad y seguridad de los datos de todos los usuarios.
+                    </p>
+                    <p>
+                        Asimismo, está estrictamente prohibida la distribución de contenido malicioso. Esto incluye virus, malware, spyware y cualquier otro tipo de software o script automatizado que pueda dañar nuestra Plataforma o comprometer la seguridad de otros usuarios. Cualquier intento de introducir código dañino, realizar ataques de denegación de servicio (DoS) o enviar spam en la Plataforma será motivo de medidas disciplinarias inmediatas.
+                    </p>
+                    <p>
+                        Finalmente, la publicación de contenido ofensivo y abusivo también está prohibida. Nos esforzamos por mantener un ambiente de respeto y profesionalismo en la Plataforma, por lo que no se permite publicar comentarios, reseñas o cualquier tipo de contenido que sea discriminatorio, difamatorio o incite a la violencia. Esta política abarca tanto el contenido que se publica de manera visible en la Plataforma, como el contenido que se utiliza en comunicaciones privadas entre usuarios.
+                    </p>
+
+                </div>
+                <div id="privacidad" class="mt-4">
+                    <h3>3. Política de Privacidad y Protección de Datos</h3>
+                    <p>
+                        La información personal que proporcionas a través de nuestra Plataforma será tratada conforme a los más altos estándares de seguridad y confidencialidad. Valoramos tu privacidad y estamos comprometidos a proteger tus datos personales en todo momento. La recopilación, almacenamiento y uso de esta información se realiza exclusivamente para los fines legítimos establecidos en nuestra política de privacidad y de acuerdo con la normativa vigente de protección de datos.
+                    </p>
+                    <p>
+                        Nos aseguramos de que todos los datos personales, como nombres, direcciones, información de contacto y detalles de pago, se almacenen en sistemas seguros y estén sujetos a procedimientos de cifrado para evitar accesos no autorizados. Solo el personal autorizado tiene acceso a esta información, y cada miembro de nuestro equipo ha sido capacitado en las prácticas de seguridad necesarias para manejar los datos personales de manera responsable.
+                    </p>
+                    <p>
+                        Además, en ningún caso compartimos ni vendemos tus datos personales a terceros para fines de marketing u otros fines no relacionados con la prestación de nuestros servicios. Cualquier transferencia de información a terceros, cuando sea absolutamente necesaria (por ejemplo, para realizar entregas o procesar pagos), se realiza bajo estrictos acuerdos de confidencialidad y solo con empresas de confianza que cumplen con nuestras políticas de privacidad y las leyes aplicables.
+                    </p>
+                    <p>
+                        Es importante que sepas que tienes el derecho de acceder, rectificar, actualizar o eliminar tus datos personales en cualquier momento. Nuestra plataforma está diseñada para facilitar este proceso, y nuestro equipo de soporte está disponible para ayudarte con cualquier solicitud o consulta relacionada con tus datos. Nos esforzamos en ser transparentes sobre cómo utilizamos la información que nos proporcionas y estamos comprometidos a proteger tu privacidad en todo momento.
+                    </p>
+                    <p>
+                        Asimismo, está estrictamente prohibido recopilar datos de otros usuarios sin su consentimiento. Cualquier intento de acceder a la información personal de otros usuarios sin autorización será considerado una violación grave de nuestra política y podría llevar a la suspensión o cancelación de tu cuenta. Nos reservamos el derecho de tomar las medidas legales necesarias en caso de detectar actividades de recopilación de datos no autorizadas.
+                    </p>
+                    <p>
+                        En caso de que se produzca una vulneración de seguridad que pueda comprometer la privacidad de tus datos personales, te notificaremos lo antes posible y tomaremos todas las medidas necesarias para mitigar cualquier posible daño. Nuestro objetivo es mantener la confianza de nuestros usuarios mediante el manejo seguro y ético de su información, así como el cumplimiento de todas las normativas de protección de datos.
+                    </p>
+                 </div>
+                <div id="contenido" class="mt-4">
+                    <h3>4. Contenido Generado por el Usuario</h3>
+                    <p>
+                        Respetamos y valoramos las reseñas, comentarios, y cualquier otro contenido que nuestros usuarios deseen compartir en nuestra Plataforma. Creemos que el feedback genuino es esencial para mejorar la experiencia de todos, así como para ayudar a otros usuarios a tomar decisiones informadas sobre nuestros productos y servicios. Sin embargo, es necesario que todo el contenido generado por los usuarios sea verídico, constructivo y respetuoso.
+                    </p>
+                    <p>
+                        Las opiniones y comentarios que compartas deben basarse en experiencias reales. Las reseñas falsas, exageradas o que contengan información engañosa sobre nuestros productos o servicios no están permitidas, ya que pueden confundir o influir negativamente en otros usuarios. Nos reservamos el derecho de eliminar cualquier contenido que infrinja esta norma o que no represente una experiencia honesta con nuestros servicios.
+                    </p>
+                    <p>
+                        Asimismo, no se permite el uso de lenguaje ofensivo, vulgar, difamatorio o discriminatorio en ningún comentario o reseña. Fomentamos un ambiente positivo y seguro en la Plataforma, por lo que cualquier contenido que incite al odio, promueva la violencia o resulte ofensivo para otros usuarios será eliminado, y, si es necesario, tomaremos medidas adicionales contra la cuenta responsable.
+                    </p>
+                    <p>
+                        También queremos subrayar la importancia del respeto a los derechos de autor y la propiedad intelectual en el contenido que compartas. Al publicar cualquier tipo de material, incluyendo fotos, videos, o textos, asegúrate de que tienes los derechos necesarios para hacerlo y de que no infringes los derechos de terceros. Nos comprometemos a proteger los derechos de propiedad intelectual y esperamos que los usuarios hagan lo mismo.
+                    </p>
+                    <p>
+                        Además, al contribuir con contenido en nuestra Plataforma, otorgas a nuestra empresa el derecho a utilizar, reproducir y mostrar dicho contenido en beneficio de nuestra comunidad, siempre bajo los términos que permitan el respeto a la autoría original. Este uso puede incluir la promoción de nuestras plataformas o la utilización de tus comentarios en nuestros materiales de marketing, siempre en un marco de respeto a la autenticidad de tu mensaje.
+                    </p>
+                    <p>
+                        Nuestro equipo modera el contenido generado por los usuarios de manera continua para asegurar que cumple con estos estándares. Nos reservamos el derecho de suspender temporal o permanentemente las cuentas de aquellos usuarios que reincidan en prácticas que vayan en contra de nuestras políticas de contenido. Esta política está diseñada para promover un espacio colaborativo y seguro donde las experiencias compartidas sean enriquecedoras y de valor para toda nuestra comunidad.
+                    </p>
+                  </div>
+                <div id="seguridad" class="mt-4">
+                    <h3>5. Seguridad de la Cuenta</h3>
+                    <p>
+                        La seguridad de tu cuenta es fundamental para mantener la integridad de nuestros servicios y proteger tu información personal. Como usuario, es tu responsabilidad proteger tu cuenta y las credenciales asociadas, incluyendo tu nombre de usuario y contraseña. Te recomendamos elegir una contraseña segura, que combine letras, números y símbolos, y evitar utilizar contraseñas que ya uses en otros sitios web o servicios en línea.
+                    </p>
+                    <p>
+                        Mantén tus credenciales en un lugar seguro y evita compartirlas con terceros. Recuerda que permitir el acceso a tu cuenta a personas no autorizadas podría comprometer no solo la seguridad de tu propia información, sino también la de otros usuarios y la funcionalidad de nuestra Plataforma. Si sospechas que alguien más ha accedido a tu cuenta sin tu consentimiento, cambia tu contraseña de inmediato y notifícanos para que podamos tomar las medidas necesarias.
+                    </p>
+                    <p>
+                        Además, nos reservamos el derecho de monitorear actividades sospechosas y realizar suspensiones temporales de cuentas cuando detectemos comportamientos inusuales. Por ejemplo, si observamos intentos repetidos de inicio de sesión fallidos o acceso desde ubicaciones geográficas inusuales, podemos restringir temporalmente el acceso a tu cuenta como medida de seguridad. Este proceso es importante para proteger tu cuenta de posibles amenazas externas.
+                    </p>
+                    <p>
+                        También fomentamos el uso de autenticación en dos pasos (2FA), cuando esté disponible, para añadir una capa adicional de protección a tu cuenta. La autenticación en dos pasos requiere que confirmes tu identidad mediante un segundo factor, como un código de verificación enviado a tu dispositivo móvil, lo que ayuda a prevenir accesos no autorizados incluso si alguien llega a conocer tu contraseña.
+                    </p>
+                    <p>
+                        Finalmente, es importante recordar que nuestra Plataforma nunca te pedirá tu contraseña a través de correo electrónico, mensajes de texto o llamadas telefónicas. Si recibes algún mensaje sospechoso solicitando tus credenciales, por favor ignóralo y repórtalo. La protección de tu cuenta depende en gran medida de mantenerte alerta ante posibles intentos de phishing u otras formas de fraude.
+                    </p>
+</div>
+                <div id="consecuencias" class="mt-4">
+                    <h3>6. Consecuencias del Incumplimiento</h3>
+                        <p>
+                            Si incumples con esta Política de Uso Aceptable, nos reservamos el derecho de tomar diversas medidas para proteger la integridad de nuestra Plataforma y la seguridad de todos nuestros usuarios. Las sanciones pueden variar según la gravedad de la infracción y pueden incluir desde advertencias hasta la suspensión o terminación permanente de tu cuenta. Nuestro objetivo es mantener un entorno seguro y confiable para todos, y para ello es fundamental que todos los usuarios respeten estas políticas.
+                        </p>
+                        <p>
+                            Las sanciones por incumplimiento pueden comenzar con una advertencia inicial. En casos de infracciones leves o errores involuntarios, como un uso inapropiado de ciertas funciones, es posible que te enviemos una notificación para informarte sobre la conducta inapropiada y te indiquemos cómo evitar futuros problemas. Esta medida tiene como propósito educar y corregir comportamientos, buscando una solución pacífica y amigable.
+                        </p>
+                        <p>
+                            Sin embargo, en casos de infracciones graves, tales como intentos de hackeo, fraude, distribución de malware, o actividades que pongan en riesgo la seguridad de otros usuarios o de la Plataforma en general, podremos optar por la suspensión inmediata de tu cuenta. La suspensión puede ser temporal mientras investigamos la situación, o permanente si determinamos que el incumplimiento es severo o recurrente.
+                        </p>
+                        <p>
+                            Además de la suspensión o terminación de tu cuenta, algunas violaciones podrían requerir la intervención de autoridades legales. En los casos en los que se detecten actividades ilegales o potencialmente dañinas, como intentos de acceso no autorizado, robo de identidad, o fraudes significativos, procederemos a denunciar el incidente a las autoridades competentes. Esto incluye la entrega de toda la información relevante para la investigación y persecución de la actividad delictiva, protegiendo así a nuestra comunidad y la reputación de nuestra Plataforma.
+                        </p>
+                        <p>
+                            También nos reservamos el derecho de emprender acciones legales para buscar compensación por daños causados a nuestra empresa o a nuestros usuarios. En situaciones en las que el incumplimiento haya tenido un impacto negativo considerable en nuestra operación, reputación o en la seguridad de datos, podremos proceder con demandas legales para recuperar las pérdidas o mitigar los daños causados.
+                        </p>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vinculando Bootstrap y scripts de JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
