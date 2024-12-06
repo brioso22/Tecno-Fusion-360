@@ -103,10 +103,10 @@ WSGI_APPLICATION = 'TecnoFusion3.wsgi.application'
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'TecnoFusion',
-    'USER': 'postgres',
-    'PASSWORD': 'admin1234',
-    'HOST': 'localhost',
+    'NAME': 'prueba_mm6n',
+    'USER': 'prueba_mm6n_user',
+    'PASSWORD': 'TipG7Fyn8bgSzrpsfbUHXqT54V04YQWr',
+    'HOST': 'dpg-ct99uit6l47c73ap9cf0-a',
     'PORT':'5432'
     }
 }
