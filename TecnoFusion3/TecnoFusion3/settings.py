@@ -13,7 +13,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='eufgshjadfg3723rd')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'tecno-fusion-360.onrender.com', 
+    'localhost', 
+    '127.0.0.1'
+]
 
 RENDER_EXTERNA_HOSTNAME = os.environ.get('RENDER_EXTERNA_HOSTNAME')
 if RENDER_EXTERNA_HOSTNAME:
@@ -152,8 +156,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilessStorage'
-
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
