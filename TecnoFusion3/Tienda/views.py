@@ -93,7 +93,7 @@ def tienda_movil(request):
         productos = productos.filter(nombre__icontains=query)
 
     # Devuelve la plantilla con los productos filtrados, búsqueda y cantidad de carrito
-    return render(request, 'tienda_movil.html', {
+    return render(request, 'tienda_moPru.html', {
         'productos': productos,
         'categoria': categoria,
         'query': query,
