@@ -2,11 +2,14 @@
 
 set -o errexit
 
-# Instalar las dependencias desde requirements.txt en el directorio TecnoFusion3
-pip install -r TecnoFusion3/requirements.txt
+# Cambiar al directorio que contiene manage.py
+cd TecnoFusion3
 
-# Ejecutar collectstatic desde el archivo manage.py dentro de TecnoFusion3
-python TecnoFusion3/manage.py collectstatic --noinput
+# Instalar dependencias
+pip install -r requirements.txt
 
-# Aplicar migraciones desde el archivo manage.py dentro de TecnoFusion3
-python TecnoFusion3/manage.py migrate
+# Ejecutar collectstatic
+python manage.py collectstatic --noinput
+
+# Aplicar migraciones
+python manage.py migrate
