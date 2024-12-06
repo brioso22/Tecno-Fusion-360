@@ -67,6 +67,43 @@ def sugerencias(request):
 def tienda_movil(request):
     # Verifica si el usuario está autenticado
     if request.user.is_authenticated:
+        # Filtrar productos con stock mayor o igual a 1
+        productos_en_carrito = ProductosGuardados.objects.filter(
+            usuario=request.user,
+            activo=True,
+            cantidad_stock__gte=1  # Filtra solo productos con cantidad_stock >= 1
+        )
+        cantidad_en_carrito = productos_en_carrito.count()
+    else:
+        productos_en_carrito = []
+        cantidad_en_carrito = 0  # Si no está autenticado, el carrito está vacío
+
+    # Obtiene el valor de 'categoria' desde el parámetro GET
+    categoria = request.GET.get('categoria', 'todos')  # Por defecto, muestra 'todos'
+    query = request.GET.get('q')  # Obtiene el valor de la búsqueda
+
+    # Filtra los productos por categoría y búsqueda
+    if categoria == 'todos':
+        productos = Producto.objects.filter(visible=True)  # Solo productos visibles
+    else:
+        productos = Producto.objects.filter(categoria=categoria, visible=True)
+
+    # Filtra por búsqueda, si se ingresó una consulta
+    if query:
+        productos = productos.filter(nombre__icontains=query)
+
+    # Devuelve la plantilla con los productos filtrados, búsqueda y cantidad de carrito
+    return render(request, 'tienda_movil.html', {
+        'productos': productos,
+        'categoria': categoria,
+        'query': query,
+        'carrito': productos_en_carrito,
+        'cantidad_en_carrito': cantidad_en_carrito
+    })
+
+#def tienda_movil(request):
+    # Verifica si el usuario está autenticado
+    if request.user.is_authenticated:
         productos_en_carrito = ProductosGuardados.objects.filter(usuario=request.user, activo=True)
     else:
         productos_en_carrito = []  # Si el usuario no está autenticado, no hay productos en el carrito
