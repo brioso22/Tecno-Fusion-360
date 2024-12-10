@@ -1,3 +1,29 @@
+"""
+Este archivo contiene la configuración principal de tu proyecto Django, incluyendo las rutas de archivos estáticos, configuraciones de base de datos, autenticación, y más.
+
+- Seguridad:
+    - `SECRET_KEY`: La clave secreta utilizada en producción debe mantenerse en secreto.
+    - `DEBUG`: Debe estar en `False` en producción.
+    - `ALLOWED_HOSTS`: Define los dominios permitidos para el proyecto.
+
+- Instalación de aplicaciones:
+    - Se incluyen aplicaciones estándar de Django como `admin`, `auth`, `sessions`, entre otras.
+    - También se incluyen aplicaciones personalizadas como `Inicio`, `Tienda`, `Donaciones`, etc.
+    - Se configura `django-allauth` para la autenticación de usuarios.
+
+- Base de datos:
+    - Se utiliza PostgreSQL como motor de base de datos. Configura los valores de nombre, usuario y contraseña de la base de datos.
+
+- Configuración de archivos estáticos:
+    - Configura las rutas para archivos estáticos y medios (como imágenes, videos, documentos).
+    - Si `DEBUG` es `False`, los archivos estáticos se almacenan en `STATIC_ROOT`.
+
+- Configuración de correo electrónico:
+    - Se utiliza el backend SMTP de Gmail para enviar correos electrónicos, tanto en desarrollo como en producción.
+
+- Otros ajustes:
+    - `LOGIN_REDIRECT_URL` y `LOGOUT_REDIRECT_URL`: Redirige al usuario a la página de inicio después de iniciar o cerrar sesión.
+"""
 
 from pathlib import Path
 import os

@@ -5,13 +5,42 @@ from .models import Producto, ProductosGuardados, Comentario, Compra,PagoEnLinea
 from datetime import date
 from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
 from django.db.models import Count
-from django.views.decorators.csrf import csrf_protect
 
 
+"""
+Módulo de vistas para la aplicación web de tienda.
 
+Este módulo contiene las vistas principales relacionadas con la tienda, como
+la visualización de productos, gestión del carrito, procesamiento de compras, 
+y manejo de comentarios.
+
+Funciones principales:
+- tienda: Muestra los productos en la tienda con filtrado y búsqueda.
+- agregar_al_carrito: Permite agregar productos al carrito de un usuario autenticado.
+- proceso_compra: Procesa la compra de productos seleccionados del carrito.
+- detalle_producto: Muestra los detalles de un producto específico.
+- sugerencias: Devuelve sugerencias de productos en formato JSON.
+"""
 
 
 def tienda(request):
+
+    """
+    Muestra los productos en la tienda con opciones de filtrado por categoría y búsqueda.
+
+    Parámetros:
+        request (HttpRequest): Objeto de solicitud HTTP que contiene los parámetros GET:
+            - categoria (str, opcional): Filtra productos por categoría (por defecto, 'todos').
+            - q (str, opcional): Término de búsqueda en el nombre del producto.
+
+    Contexto para la plantilla:
+        - productos (QuerySet): Productos visibles filtrados según los criterios.
+        - categoria (str): Categoría seleccionada.
+        - query (str): Término de búsqueda.
+        - carrito (QuerySet): Productos en el carrito del usuario autenticado.
+        - cantidad_en_carrito (int): Número de productos en el carrito.
+    """
+
     # Verifica si el usuario está autenticado
     if request.user.is_authenticated:
         # Filtrar productos con stock mayor o igual a 1
@@ -51,6 +80,19 @@ def tienda(request):
 
 
 def sugerencias(request):
+    """
+    Devuelve un JSON con sugerencias de productos según un término de búsqueda.
+
+    Parámetros:
+        request (HttpRequest): Objeto de solicitud HTTP que contiene los parámetros GET:
+            - q (str, opcional): Término de búsqueda.
+
+    Respuesta JSON:
+        - sugerencias (list): Lista de productos con los campos:
+            - nombre (str): Nombre del producto.
+            - precio (float): Precio del producto.
+            - categoria (str): Nombre de la categoría del producto.
+    """
     query = request.GET.get('q', '')
     if query:
         # Filtrar productos por nombre que contengan el término de búsqueda
@@ -65,6 +107,22 @@ def sugerencias(request):
 
 
 def tienda_movil(request):
+
+    """
+    Versión móvil de la vista `tienda`, con opciones de filtrado por categoría y búsqueda.
+
+    Parámetros:
+        request (HttpRequest): Objeto de solicitud HTTP que contiene los parámetros GET:
+            - categoria (str, opcional): Filtra productos por categoría (por defecto, 'todos').
+            - q (str, opcional): Término de búsqueda.
+
+    Contexto para la plantilla:
+        - productos (QuerySet): Productos visibles filtrados según los criterios.
+        - categoria (str): Categoría seleccionada.
+        - query (str): Término de búsqueda.
+        - carrito (QuerySet): Productos en el carrito del usuario autenticado.
+        - cantidad_en_carrito (int): Número de productos en el carrito.
+    """
     # Verifica si el usuario está autenticado
     if request.user.is_authenticated:
         # Filtrar productos con stock mayor o igual a 1
@@ -101,35 +159,23 @@ def tienda_movil(request):
         'cantidad_en_carrito': cantidad_en_carrito
     })
 
-#def tienda_movil(request):
-    # Verifica si el usuario está autenticado
-    if request.user.is_authenticated:
-        productos_en_carrito = ProductosGuardados.objects.filter(usuario=request.user, activo=True)
-    else:
-        productos_en_carrito = []  # Si el usuario no está autenticado, no hay productos en el carrito
-
-    # Obtiene el valor de 'categoria' desde el parámetro GET
-    categoria = request.GET.get('categoria', 'todos')  # Por defecto, muestra 'todos'
-    query = request.GET.get('q')  # Obtiene el valor de la búsqueda
-
-    # Filtra los productos por categoría y búsqueda
-    if categoria == 'todos':
-        productos = Producto.objects.all()
-    else:
-        productos = Producto.objects.filter(categoria=categoria)
-
-    # Filtra por búsqueda, si se ingresó una consulta
-    if query:
-        productos = productos.filter(nombre__icontains=query)
-
-    # Devuelve la plantilla con los productos filtrados y la búsqueda
-    return render(request, 'tienda_movil.html', {'productos': productos, 'categoria': categoria, 'query': query, 'carrito': productos_en_carrito})
 
 
 
 
 @login_required
 def agregar_al_carrito(request, producto_id):
+    """
+    Agrega un producto al carrito del usuario autenticado.
+
+    Parámetros:
+        request (HttpRequest): Objeto de solicitud HTTP.
+        producto_id (int): ID del producto a agregar.
+
+    Comportamiento:
+        - Si el producto ya está en el carrito, incrementa su cantidad.
+        - Si no está en el carrito, lo agrega con una cantidad inicial de 1.
+    """
     producto = get_object_or_404(Producto, id=producto_id)
     usuario = request.user
 
@@ -155,6 +201,18 @@ def agregar_al_carrito(request, producto_id):
 
 @login_required
 def agregar_comentario(request, producto_id):
+    """
+    Permite a un usuario autenticado agregar un comentario a un producto.
+
+    Parámetros:
+        request (HttpRequest): Objeto de solicitud HTTP que contiene los datos POST:
+            - texto (str): Texto del comentario.
+            - rate (int): Calificación del producto (de 1 a 5).
+        producto_id (int): ID del producto sobre el cual se comenta.
+
+    Redirección:
+        - Redirige a la vista del producto después de guardar el comentario.
+    """
     if request.method == 'POST':
         texto = request.POST.get('texto')
         calificacion = request.POST.get('rate')  # Cambiar de 'calificacion' a 'rate'
@@ -174,6 +232,21 @@ def agregar_comentario(request, producto_id):
 
 
 def detalle_producto(request, id):
+    """
+    Muestra los detalles de un producto, incluyendo sus comentarios y calificaciones.
+
+    Parámetros:
+        request (HttpRequest): Objeto de solicitud HTTP.
+        id (int): ID del producto a mostrar.
+
+    Contexto para la plantilla:
+        - producto (Producto): Detalles del producto.
+        - comentarios (QuerySet): Comentarios del producto con detalles adicionales.
+        - calificaciones_porcentajes (dict): Porcentaje de cada tipo de calificación (1 a 5).
+        - total_comentarios (int): Número total de comentarios.
+        - estrellas (list): Lista de calificaciones de 5 a 1 para mostrar gráficamente.
+        - compras_usuario (QuerySet): Compras del usuario autenticado relacionadas con el producto.
+    """
     # Obtener el producto
     producto = get_object_or_404(Producto, id=id)
     
@@ -232,6 +305,19 @@ def detalle_producto(request, id):
 
 @login_required  # Cambia @csrf_protect por @login_required
 def marcar_utilidad_reseña(request, comentario_id):
+    """
+    Permite a un usuario marcar una reseña como útil o no.
+
+    Parámetros:
+        request (HttpRequest): Objeto de solicitud HTTP con datos POST (JSON):
+            - utilidad (str): 'si' o 'no', según la utilidad percibida.
+        comentario_id (int): ID del comentario a marcar.
+
+    Respuesta JSON:
+        - success (bool): Indica si la operación fue exitosa.
+        - utilidad (str): Valor de utilidad marcado ('si' o 'no').
+        - error (str, opcional): Mensaje de error si ocurre.
+    """
     if request.method == "POST":
         try:
             data = json.loads(request.body)
@@ -256,6 +342,23 @@ def marcar_utilidad_reseña(request, comentario_id):
 
 @login_required
 def proceso_compra(request):
+    """
+    Procesa la compra de los productos seleccionados en el carrito del usuario autenticado.
+
+    Parámetros:
+        request (HttpRequest): Objeto de solicitud HTTP con datos POST:
+            - Datos del cliente (nombre, correo, teléfono, etc.).
+            - Productos seleccionados (IDs separados por comas).
+            - Método de pago ('online' o 'transfer') con datos correspondientes.
+
+    Comportamiento:
+        - Crea una instancia de Compra con sus detalles asociados.
+        - Actualiza el stock de los productos comprados.
+        - Procesa los datos del método de pago según la selección.
+
+    Plantilla:
+        - ProceCom.html: Muestra el formulario de compra y el carrito del usuario.
+    """
     productos_en_carrito = ProductosGuardados.objects.filter(usuario=request.user)
 
     if request.method == 'POST':
@@ -331,60 +434,3 @@ def proceso_compra(request):
         return HttpResponse("Compra guardada exitosamente.")
     
     return render(request, 'ProceCom.html', {'carrito': productos_en_carrito})
-
-
-
-#def proceso_compra(request):
-    if request.method == 'POST':
-        # Capturamos los datos del formulario
-        nombre_completo = request.POST.get('nombre_completo')
-        correo_electronico = request.POST.get('correo_electronico')
-        numero_telefono = request.POST.get('numero_telefono')
-        departamento = request.POST.get('departamento')
-        ciudad = request.POST.get('ciudad')
-        direccion = request.POST.get('direccion')
-        codigo_postal = request.POST.get('codigo_postal', '')  # Código postal opcional
-        
-        # Guardamos los datos en la base de datos
-        Compra.objects.create(
-            nombre_completo=nombre_completo,
-            correo_electronico=correo_electronico,
-            numero_telefono=numero_telefono,
-            departamento=departamento,
-            ciudad=ciudad,
-            direccion=direccion,
-            codigo_postal=codigo_postal
-        )
-        
-        # Redirigir o mostrar un mensaje de éxito
-        return HttpResponse("Compra guardada exitosamente.")
-    
-    # Si no es POST, renderizamos un formulario (opcional)
-    return render(request, 'ProceCom.html')
-
-
-
-#def proceso_Compra(request):
-    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        for key in request.POST:
-            if key.startswith('toggler-'):
-                producto_id = key.split('-')[1]
-                is_selected = request.POST.get(key) == '1'
-
-                # Buscar el producto correspondiente
-                try:
-                    item = ProductosGuardados.objects.get(producto__id=producto_id, usuario=request.user)
-                    item.producto.is_selected = is_selected
-                    item.producto.save()
-                except ProductosGuardados.DoesNotExist:
-                    return JsonResponse({'error': 'Producto no encontrado'}, status=404)
-
-        return JsonResponse({'success': True, 'message': 'Estado actualizado correctamente'})
-
-    # Renderizado normal para GET
-    productos_en_carrito = ProductosGuardados.objects.filter(usuario=request.user)
-    return render(request, 'ProceCom.html', {'carrito': productos_en_carrito})
-
-
-
-

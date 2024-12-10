@@ -4,12 +4,43 @@ from django.contrib import messages
 from .models import Donacion
 from django.core.mail import send_mail
 
+"""
+Este archivo define las vistas para gestionar las donaciones de equipos.
+
+Vistas:
+    - `donaciones`: Renderiza la página de donaciones.
+    - `registrar_donacion`: Permite a los usuarios autenticados registrar una nueva donación.
+"""
+
 # Create your views here.
 def donaciones(request):
+    """
+    Renderiza la página principal de donaciones.
+
+    Parámetros:
+        - `request`: Objeto HttpRequest que contiene la información de la solicitud.
+
+    Retorna:
+        - Un objeto HttpResponse que renderiza la plantilla 'donaciones.html'.
+    """
     return render(request, 'donaciones.html')
 
 @login_required
 def registrar_donacion(request):
+    """
+    Procesa el formulario de registro de donaciones. Solo disponible para usuarios autenticados.
+
+    Métodos:
+        - GET: Renderiza el formulario de registro de donación.
+        - POST: Recibe y guarda los datos del formulario, y envía correos electrónicos de confirmación.
+
+    Parámetros:
+        - `request`: Objeto HttpRequest que contiene la información de la solicitud.
+
+    Retorna:
+        - Una redirección a la página principal de la tienda si la donación se registra correctamente.
+        - Un objeto HttpResponse que renderiza la plantilla 'donaciones.html' en caso de solicitud GET.
+    """
     if request.method == 'POST':
         nombre_empresa = request.POST.get('nombre_empresa')
         rubro_empresa = request.POST.get('rubro_empresa')
